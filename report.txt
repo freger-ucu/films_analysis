@@ -1,0 +1,46 @@
+One part of the group was responsible for our code, and another part was responsible for the report and AI code.
+The development process included one person sharing the screen with others giving ideas on how to write code.
+
+Main differences between our code and AI's code:
+
+- function read_file:
+The main difference in this function is that AI wraps the part in which movies are filtered by year in try-except
+structure to deal with ValueError if it occurs.
+
+Also, AI’s code returns a cleaner, more consistent structure for each row by building a formatted row that includes
+validated year and rating data
+
+
+- top_n function
+In the genre filtering part we used a for-loop while AI used list comprehension method.
+
+In actor rating calculation we created a dictionary called «actors» to store the highest rating for each actor
+by iterating over all movies. In AI's version, instead of precomputing and storing these ratings, it calculates
+the highest rating for each actor only when needed using a helper function (get_actor_highest_rating).
+Also, our code sorts film_tuples alphabetically by title, and then by average rating in descending order.
+AI’s code combines these two sorting criteria by using a lambda function:
+
+results.sort(key=lambda x: (-x[3], x[0]))
+
+AI also converts movie genres to lowercase, which is not necessary, because all the genres in the file are uppercase,
+so it is not going to cause errors.
+
+
+- write_file function
+Our code uses a string:
+output_file.write(t[0] + ', ' + str(t[1]) + '\n')
+
+While AI one uses a formatted string:
+file.write(f"{title}, {rating:.1f}\n")
+
+This doesn’t change the output though.
+
+ChatGPT didn't use any unnecessary libraries or modules. It's code didn't work at first,
+Due to it splitting the code by '\t' instead of ';'. This wasn't hard to fix, however.
+I tested the following functions to make sure the code works as intended:
+
+print(read_file('films.csv', 2014)[:2])
+print(top_n(read_file('films.csv', 2014), 'Action', 5))
+write_file(top_n(read_file('films.csv', 2014), 'Action', 5), 'example')
+
+It wasn't necessary to use any of the tactics from previous lessons.
